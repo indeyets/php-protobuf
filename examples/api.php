@@ -110,6 +110,37 @@ class Person extends protobuf::Message
     }
 }
 
+class AddressBook extends protobuf::Message
+{
+    private $person = array();
+
+    public function __get($name)
+    {
+        switch ($name) {
+            case 'person':
+                return $this->$name;
+            break;
+
+            default:
+                throw new LogicException();
+            break;
+        }
+    }
+
+    public function __set($name, $value)
+    {
+        switch ($name) {
+            case 'person':
+                throw new LogicException($name.' is an array. Not allowed to set directly');
+            break;
+
+            default:
+                throw new LogicException();
+            break;
+        }
+    }
+}
+
 /*
 // See README.txt for information and build instructions.
 
